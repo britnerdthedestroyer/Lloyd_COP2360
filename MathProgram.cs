@@ -1,5 +1,5 @@
 /*If you can figure out why vscode keeps confusing this for Java after the first runthrough I'm all ears.
-* I'm at my wit's end with vscode, it works everywhere else and it works every time I start the compiler*/
+* This took longer than my Java final, I'm assuming there's something making the compilers cross streams*/
 using System;
 
 class Math
@@ -37,13 +37,17 @@ class Math
             {
                 Console.Write(prompt);
                 string input = Console.ReadLine();
-                if (decimal.TryParse(input, out decimal number))
+                try
                 {
-                    return number;
+                    return Convert.ToDecimal(input);
                 }
-                else
+                catch (FormatException)
                 {
                     Console.WriteLine("Error: Invalid format. Please enter a valid number.");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("Error: Number is too large.");
                 }
             }
         }
